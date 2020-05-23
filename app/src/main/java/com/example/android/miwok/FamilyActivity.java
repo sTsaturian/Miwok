@@ -17,6 +17,10 @@ package com.example.android.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class FamilyActivity extends AppCompatActivity {
 
@@ -24,5 +28,13 @@ public class FamilyActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_family);
+        ArrayList<Word> words = new ArrayList<>();
+
+        words.add(new Word("mother","lutti"));
+
+        WordAdapter itemsAdapter = new WordAdapter(this, words);
+        ListView listView = (ListView) findViewById(R.id.family_list);
+        listView.setAdapter(itemsAdapter);
+        Log.i("NumbersActivity","Test");
     }
 }

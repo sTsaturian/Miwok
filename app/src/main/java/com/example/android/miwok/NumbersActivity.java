@@ -37,7 +37,7 @@ public class NumbersActivity extends AppCompatActivity {
         words.add(new Word("one","lutti"));
 
         WordAdapter itemsAdapter = new WordAdapter(this, words);
-        ListView listView = (ListView) findViewById(R.id.list);
+        ListView listView = (ListView) findViewById(R.id.number_list);
         listView.setAdapter(itemsAdapter);
         Log.i("NumbersActivity","Test");
     }

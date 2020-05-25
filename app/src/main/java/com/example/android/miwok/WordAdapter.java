@@ -19,10 +19,10 @@ public class WordAdapter extends ArrayAdapter<Word> {
         super(context, 42, words);
     }
 
-    public View getView(int position, View convertView, ViewGroup parent){
+    public View getView(int position, View convertView, ViewGroup parent) {
         // Check if the existing view is being reused, otherwise inflate the view
         View listItemView = convertView;
-        if(listItemView == null) {
+        if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(
                     R.layout.list_item, parent, false);
         }
@@ -34,7 +34,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
         TextView miwokTextView = listItemView.findViewById(R.id.miwok_text_view);
         miwokTextView.setText(currentWord.getMiwokTranslation());
 
-        TextView defaultTextView  = listItemView.findViewById(R.id.default_text_view);
+        TextView defaultTextView = listItemView.findViewById(R.id.default_text_view);
         defaultTextView.setText(currentWord.getDefaultTranslation());
 
         return listItemView;

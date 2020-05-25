@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Find the View that shows the family category
-        TextView family =  findViewById(R.id.family);
+        TextView family = findViewById(R.id.family);
 
         // Set a click listener on that View
         family.setOnClickListener(new OnClickListener() {

@@ -11,13 +11,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
 public class WordAdapter extends ArrayAdapter<Word> {
+    int colorID;
+
     @SuppressLint("ResourceType")
-    public WordAdapter(@NonNull Activity context, ArrayList<Word> words) {
+    public WordAdapter(@NonNull Activity context, ArrayList<Word> words, int colorID) {
         super(context, 42, words);
+        this.colorID = colorID;
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -37,6 +41,9 @@ public class WordAdapter extends ArrayAdapter<Word> {
                         R.layout.list_item, parent, false);
         }
 
+        int color = ContextCompat.getColor(getContext(),colorID);
+        listItemView.setBackgroundColor(color);
+
         TextView miwokTextView = listItemView.findViewById(R.id.miwok_text_view);
         miwokTextView.setText(currentWord.getMiwokTranslation());
 
@@ -46,7 +53,9 @@ public class WordAdapter extends ArrayAdapter<Word> {
         if (imageID != -1){
             ImageView imageView = listItemView.findViewById(R.id.the_image_view);
             imageView.setImageResource(imageID);
+            imageView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.tan_background));
         }
+
 
         return listItemView;
     }

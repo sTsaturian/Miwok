@@ -3,6 +3,7 @@ package com.example.android.miwok;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class WordAdapter extends ArrayAdapter<Word> {
             imageView.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.tan_background));
         }
 
+        final int audioID = currentWord.getAudioId();
 
         return listItemView;
     }

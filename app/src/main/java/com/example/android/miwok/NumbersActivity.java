@@ -35,16 +35,16 @@ public class NumbersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_words);
         ArrayList<Word> words = new ArrayList<>();
 
-        words.add(new Word("one", "lutti", R.drawable.number_one));
-        words.add(new Word("two", "otiiko", R.drawable.number_two));
-        words.add(new Word("three", "tolookosu", R.drawable.number_three));
-        words.add(new Word("four", "oyyisa", R.drawable.number_four));
-        words.add(new Word("five", "massokka", R.drawable.number_five));
-        words.add(new Word("six", "temmokka", R.drawable.number_six));
-        words.add(new Word("seven", "kenekaku", R.drawable.number_seven));
-        words.add(new Word("eight", "kawinta", R.drawable.number_eight));
-        words.add(new Word("nine", "wo’e", R.drawable.number_nine));
-        words.add(new Word("ten", "na’aacha", R.drawable.number_ten));
+        words.add(new Word(getString(R.string._1_default), getString(R.string._1_miwok), R.drawable.number_one));
+        words.add(new Word(getString(R.string._2_default), getString(R.string._2_miwok), R.drawable.number_two));
+        words.add(new Word(getString(R.string._3_default), getString(R.string._3_miwok), R.drawable.number_three));
+        words.add(new Word(getString(R.string._4_default), getString(R.string._4_miwok), R.drawable.number_four));
+        words.add(new Word(getString(R.string._5_default), getString(R.string._5_miwok), R.drawable.number_five));
+        words.add(new Word(getString(R.string._6_default), getString(R.string._6_miwok), R.drawable.number_six));
+        words.add(new Word(getString(R.string._7_default), getString(R.string._7_miwok), R.drawable.number_seven));
+        words.add(new Word(getString(R.string._8_default), getString(R.string._8_miwok), R.drawable.number_eight));
+        words.add(new Word(getString(R.string._9_default), getString(R.string._9_miwok), R.drawable.number_nine));
+        words.add(new Word(getString(R.string._10_default), getString(R.string._10_miwok), R.drawable.number_ten));
 
         WordAdapter itemsAdapter = new WordAdapter(this, words, R.color.category_numbers);
         ListView listView = (ListView) findViewById(R.id.word_list);

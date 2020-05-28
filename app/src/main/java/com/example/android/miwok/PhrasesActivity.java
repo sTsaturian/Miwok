@@ -30,16 +30,16 @@ public class PhrasesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_words);
         ArrayList<Word> words = new ArrayList<>();
 
-        words.add(new Word("Where are you going?", "minto wuksus"));
-        words.add(new Word("What is your name?", "tinnә oyaase'nә"));
-        words.add(new Word("My name is...", "oyaaset..."));
-        words.add(new Word("How are you feeling?", "michәksәs?"));
-        words.add(new Word("I’m feeling good.", "kuchi achit"));
-        words.add(new Word("Are you coming?", "әәnәs'aa?"));
-        words.add(new Word("Yes, I’m coming.", "hәә’ әәnәm"));
-        words.add(new Word("I’m coming.", "әәnәm"));
-        words.add(new Word("Let’s go.", "yoowutis"));
-        words.add(new Word("Come here.", "әnni'nem"));
+        words.add(new Word(getString(R.string.where_going_default), getString(R.string.where_going_miwok)));
+        words.add(new Word(getString(R.string.what_name_default), getString(R.string.what_name_miwok)));
+        words.add(new Word(getString(R.string.my_name_default), getString(R.string.my_name_miwok)));
+        words.add(new Word(getString(R.string.how_feeling_default), getString(R.string.how_feeling_miwok)));
+        words.add(new Word(getString(R.string.feeling_good_default), getString(R.string.feeling_good_miwok)));
+        words.add(new Word(getString(R.string.are_coming_default), getString(R.string.are_coming_miwok)));
+        words.add(new Word(getString(R.string.yes_coming_default), getString(R.string.yes_coming_miwok)));
+        words.add(new Word(getString(R.string.coming_default), getString(R.string.coming_miwok)));
+        words.add(new Word(getString(R.string.lets_go_default), getString(R.string.lets_go_miwok)));
+        words.add(new Word(getString(R.string.come_here__default), getString(R.string.come_here_miwok)));
 
         WordAdapter itemsAdapter = new WordAdapter(this, words, R.color.category_phrases);
         ListView listView = (ListView) findViewById(R.id.word_list);

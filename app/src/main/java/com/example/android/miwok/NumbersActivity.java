@@ -17,6 +17,9 @@ package com.example.android.miwok;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,6 +41,23 @@ public class NumbersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words);
+
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        AudioManager.OnAudioFocusChangeListener audioListener = new AudioManager.OnAudioFocusChangeListener(){
+            @Override
+            public void onAudioFocusChange(int focusChange) {
+                if (focusChange == AudioManager.AUDIOFOCUS_GAIN) mp.start();
+                else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) if (mp != null) mp.release();
+                else {
+                    mp.pause();
+                    mp.seekTo(0);
+                }
+            }
+        };
+
+        audioManager.requestAudioFocus(audioListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
         final ArrayList<Word> words = new ArrayList<>();
 
         words.add(new Word(getString(R.string._1_default), getString(R.string._1_miwok), R.drawable.number_one, R.raw.number_one));
@@ -70,6 +90,7 @@ public class NumbersActivity extends AppCompatActivity {
             }
         });
     }
+
 
     @Override
     protected void onStop() {

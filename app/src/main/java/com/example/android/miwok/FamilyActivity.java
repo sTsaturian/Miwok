@@ -37,13 +37,16 @@ public class FamilyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_words);
 
-        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        final AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        AudioManager.OnAudioFocusChangeListener audioListener = new AudioManager.OnAudioFocusChangeListener(){
+        final AudioManager.OnAudioFocusChangeListener audioListener = new AudioManager.OnAudioFocusChangeListener(){
             @Override
             public void onAudioFocusChange(int focusChange) {
                 if (focusChange == AudioManager.AUDIOFOCUS_GAIN) mp.start();
-                else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) if (mp != null) mp.release();
+                else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) if (mp != null) {
+                    mp.release();
+                    audioManager.abandonAudioFocus(this);
+                }
                 else {
                     mp.pause();
                     mp.seekTo(0);
@@ -51,7 +54,7 @@ public class FamilyActivity extends AppCompatActivity {
             }
         };
 
-        audioManager.requestAudioFocus(audioListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+
         final ArrayList<Word> words = new ArrayList<>();
 
         words.add(new Word(getString(R.string.father_default), getString(R.string.father_miwok), R.drawable.family_father, R.raw.family_father));
@@ -74,13 +77,16 @@ public class FamilyActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mp != null) mp.release();
                 mp = MediaPlayer.create(FamilyActivity.this, words.get(position).getAudioId());
-                mp.start();
-                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-                    public void onCompletion(MediaPlayer mp) {
-                        mp.release();
-                        mp = null;
-                    }
-                });
+                if (audioManager.requestAudioFocus(audioListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    mp.start();
+                    mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mp) {
+                            mp.release();
+                            mp = null;
+                            audioManager.abandonAudioFocus(audioListener);
+                        }
+                    });
+                }
             }
         });
     }

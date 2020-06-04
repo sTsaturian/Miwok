@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class FamilyActivity extends AppCompatActivity {
 
-    MediaPlayer mp;
+    MediaPlayer mp = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +42,9 @@ public class FamilyActivity extends AppCompatActivity {
         final AudioManager.OnAudioFocusChangeListener audioListener = new AudioManager.OnAudioFocusChangeListener(){
             @Override
             public void onAudioFocusChange(int focusChange) {
+                if (mp == null) return;
                 if (focusChange == AudioManager.AUDIOFOCUS_GAIN) mp.start();
-                else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) if (mp != null) {
+                else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                     mp.release();
                     audioManager.abandonAudioFocus(this);
                 }
@@ -94,6 +95,6 @@ public class FamilyActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mp.release();
+        if (mp != null) {mp.release(); mp = null;}
     }
 }

@@ -21,6 +21,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
 
-    MediaPlayer mp;
+    MediaPlayer mp = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +42,9 @@ public class ColorsActivity extends AppCompatActivity {
         final AudioManager.OnAudioFocusChangeListener audioListener = new AudioManager.OnAudioFocusChangeListener(){
             @Override
             public void onAudioFocusChange(int focusChange) {
+                if (mp == null) return;
                 if (focusChange == AudioManager.AUDIOFOCUS_GAIN) mp.start();
-                else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) if (mp != null) {
+                else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                     mp.release();
                     audioManager.abandonAudioFocus(this);
                 }
@@ -91,6 +93,6 @@ public class ColorsActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mp.release();
+        if (mp != null) {mp.release(); mp = null;}
     }
 }
